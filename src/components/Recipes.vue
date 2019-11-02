@@ -1,5 +1,5 @@
 <template>
-<div class="recipes" v-on:submit="searchByLetter">
+<div class="recipes">
     <div class="card mb-3" style="max-width:25rem">
         <div class="card-body">
             <h5 class="card-title">{{recipe.strMeal}}</h5>

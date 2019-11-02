@@ -50,13 +50,17 @@ export default {
     },
     getRecipes(){
       axios.get("https://www.themealdb.com/api/json/v1/1/search.php?s=" + this.searchTerm)
-      .then(response => response.data.meals.map(recipe => {
-        this.ingredients = this.getIngredients(recipe)
-        const ingredientList={ingredients : this.ingredients}
-        const recipeWithIngredients =  {...recipe, ...ingredientList}
-        console.log({ recipeWithIngredients })
-        return recipeWithIngredients
-      }))
+      .then(response => {
+  
+        const meals = response.data.meals || []
+
+        return meals.map(recipe => {
+          this.ingredients = this.getIngredients(recipe)
+          const ingredientList={ingredients : this.ingredients}
+          const recipeWithIngredients =  {...recipe, ...ingredientList}
+          return recipeWithIngredients
+        })
+      })
       .then(recipesWithIngredients => {this.recipeList = recipesWithIngredients})
     }
   },
